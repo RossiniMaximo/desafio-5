@@ -1,2 +1,5 @@
 node_modules
 prueba.ts
+dist
+-parcel-cache
+build

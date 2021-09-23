@@ -1,5 +1,7 @@
 import { state } from "../../state"
 export function initGamePage(params) {
+    const currentState = state.getState();
+
     const div = document.createElement("div");
     div.className = "container"
     div.innerHTML = `
@@ -8,17 +10,19 @@ export function initGamePage(params) {
     <the-timer id="timer"></the-timer> 
     </div>
     <p class="your-move">tu jugada :</p>
-    <p class="move-receptor">${state.getState().playerMove}</p>
+    <p class="move-receptor">${currentState.currentGame.playerMove}</p>
     <div class="hands-container">
     <rps-hands></rps-hands>
-    <div>
+    </div>
     `;
-    console.log(state.data.winner);
+    /*  const pEl = div.querySelector(".move-receptor");
+     const pElContent = pEl.textContent = currentState.currentGame.playerMove */
+
     function goToResultsPage() {
         setTimeout(() => {
             params.goTo("/result")
-        }, 4500)
+        }, 5000)
     }
-    /* goToResultsPage(); */
+    goToResultsPage();
     return div
 }

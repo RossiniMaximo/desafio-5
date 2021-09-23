@@ -864,16 +864,18 @@ parcelHelpers.export(exports, "initGamePage", ()=>initGamePage
 );
 var _state = require("../../state");
 function initGamePage(params) {
+    const currentState = _state.state.getState();
     const div = document.createElement("div");
     div.className = "container";
-    div.innerHTML = `\n    <h2 class="title"> ¡Elige una opción!</h2>\n    <div class="timer-container">\n    <the-timer id="timer"></the-timer> \n    </div>\n    <p class="your-move">tu jugada :</p>\n    <p class="move-receptor">${_state.state.getState().playerMove}</p>\n    <div class="hands-container">\n    <rps-hands></rps-hands>\n    <div>\n    `;
-    console.log(_state.state.data.winner);
-    function goToResultsPage() {
+    div.innerHTML = `\n    <h2 class="title"> ¡Elige una opción!</h2>\n    <div class="timer-container">\n    <the-timer id="timer"></the-timer> \n    </div>\n    <p class="your-move">tu jugada :</p>\n    <p class="move-receptor">${currentState.currentGame.playerMove}</p>\n    <div class="hands-container">\n    <rps-hands></rps-hands>\n    </div>\n    `;
+    /*  const pEl = div.querySelector(".move-receptor");
+     const pElContent = pEl.textContent = currentState.currentGame.playerMove */ function goToResultsPage() {
         setTimeout(()=>{
             params.goTo("/result");
-        }, 4500);
+        }, 5000);
     }
-    /* goToResultsPage(); */ return div;
+    goToResultsPage();
+    return div;
 }
 
 },{"../../state":"28XHA","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"hvnGp":[function(require,module,exports) {
@@ -889,6 +891,10 @@ function initResultPage(params) {
     const tieURL = require("url:../../images/tie-game.jpg");
     const div = document.createElement('div');
     div.innerHTML = `\n        <div class="result-container">\n            <img class="win-img" src="${winURL}">\n        </div>\n        <div class="content">\n            <div class="scoreboard-container">\n                <h4 class="scoreboard__title">Puntaje</h4>\n                <p class="scoreboard__player">Vos :</p>\n                <p class="scoreboard__computer">Máquina :</p>\n            </div>\n            <div class="butt-container">\n                <my-button id="play-again-button">Volver a jugar</my-button>\n            </div>\n        </div>\n    `;
+    const buttonEl = div.querySelector("#play-again-button");
+    buttonEl.addEventListener("click", ()=>{
+        params.goTo("/ingame");
+    });
     console.log("current state", currentState);
     const imgEl = div.querySelector(".win-img");
     let imgAtt = imgEl.getAttribute("src");

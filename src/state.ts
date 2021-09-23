@@ -58,7 +58,6 @@ const state = {
                 winner: "computadora"
             })
         };
-
     },
     setComputerMove(move) {
         const currentState = this.getState();

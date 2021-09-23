@@ -20,6 +20,10 @@ export function initResultPage(params) {
             </div>
         </div>
     `;
+    const buttonEl = div.querySelector("#play-again-button")
+    buttonEl.addEventListener("click", () => {
+        params.goTo("/ingame")
+    })
     console.log("current state", currentState);
     const imgEl = div.querySelector(".win-img");
     let imgAtt = imgEl.getAttribute("src");
