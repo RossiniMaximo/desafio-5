@@ -1,0 +1,69 @@
+*{
+    box-sizing: border-box;
+}
+body{
+}
+
+
+.result-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+.win-img{
+        width : 200px;
+        height : 225px;
+}
+
+.content{
+    padding : 20px;
+}
+
+.scoreboard-container{
+    text-align: center;
+    border : solid 10px  greenyellow;;
+    border-radius: 10px;;
+    max-width :500px;
+}
+
+@media(min-width : 960px){
+    .scoreboard-container{
+        margin : 0 auto;
+    }
+}
+
+.scoreboard-container p {
+    padding-left: 80px;
+}
+
+.scoreboard__title{
+    font-family: 'Gluten', cursive;
+    font-size: 35px;
+    color : greenyellow;
+}
+
+.scoreboard__player{
+    font-family: 'Gluten', cursive;
+    font-size:25px;
+    color : greenyellow;
+}
+
+.scoreboard__computer{
+    font-family: 'Gluten', cursive;
+    font-size:25px;
+    color : greenyellow;
+}
+
+.butt-container{
+    margin-top: 30px;
+    max-width: 500px;
+}
+
+@media(min-width:960px){
+    .butt-container{
+        margin : 0 auto;
+        margin-top : 20px;
+    }
+}
+
+/*# sourceMappingURL=index.a3fac4de.css.map */
