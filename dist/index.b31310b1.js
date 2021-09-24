@@ -581,7 +581,6 @@ class Hands extends HTMLElement {
                 ..._state.state,
                 currentState
             });
-            console.log(currentState);
         /* console.log("piedra", state.data.currentGame.playerMove); */ });
         const papelId = this.shadow.querySelector("#papel");
         papelId.addEventListener("click", (e)=>{
@@ -632,11 +631,15 @@ const state = {
             playerMove: "",
             computerMove: ""
         },
-        winner: ""
+        winner: "",
+        playerScore: 0,
+        computerScore: 0
     },
     listeners: [],
-    playerScore: 0,
-    computerScore: 0,
+    scoreCounter (winner) {
+        if (winner == "player") state.data.playerScore++;
+        if (winner == "computer") state.data.computerScore++;
+    },
     getState () {
         return this.data;
     },
@@ -649,49 +652,40 @@ const state = {
     suscribe (callback) {
         this.listeners.push(callback);
     },
-    pushToHistory (game) {
-        const currentState = this.getState();
-        currentState.history(game);
-    },
     setMove (move) {
         const currentState = this.getState();
         currentState.currentGame.playerMove = move;
     },
-    Result (playerMove, botMove) {
-        const ganePiedra = playerMove == "piedra" && botMove == "tijeras";
-        const ganePapel = playerMove == "papel" && botMove == "piedra";
-        const ganeTijeras = playerMove == "tijeras" && botMove == "papel";
+    result (playerMove, botMove) {
+        /* playerMove = state.data.currentGame.playerMove
+        botMove = state.data.currentGame.computerMove || alternativa mas corta ||*/ const ganePiedra = state.data.currentGame.playerMove == "piedra" && state.data.currentGame.computerMove == "tijeras";
+        const ganePapel = state.data.currentGame.playerMove == "papel" && state.data.currentGame.computerMove == "piedra";
+        const ganeTijeras = state.data.currentGame.playerMove == "tijeras" && state.data.currentGame.computerMove == "papel";
         const gano = [
             ganePiedra,
             ganePapel,
             ganeTijeras
         ].includes(true);
-        if (gano == true) state.setState({
-            ...state.getState(),
-            winner: "player"
-        });
-        const botPiedra = botMove == "piedra" && playerMove == "tijeras";
-        const botPapel = botMove == "papel" && playerMove == "piedra";
-        const botTijeras = botMove == "tijeras" && playerMove == "papel";
+        if (gano == true) {
+            state.data.winner = "player";
+            this.scoreCounter(state.data.winner);
+        }
+        const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
+        const botPapel = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "piedra";
+        const botTijeras = state.data.currentGame.computerMove == "tijeras" && state.data.currentGame.playerMove == "papel";
         const botGana = [
             botPiedra,
             botPapel,
             botTijeras
         ].includes(true);
-        if (botGana == true) state.setState({
-            ...state,
-            winner: "computadora"
-        });
+        if (botGana == true) {
+            state.data.winner = "computer";
+            this.scoreCounter(state.data.winner);
+        }
     },
-    setComputerMove (move) {
+    setComputerMove (botMove) {
         const currentState = this.getState();
-        const moves = [
-            "piedra",
-            "papel",
-            "tijeras"
-        ];
-        move = moves[Math.floor(Math.random() * moves.length)];
-        currentState.currentGame.computerMove = move;
+        currentState.currentGame.computerMove = botMove;
     }
 };
 
@@ -809,16 +803,9 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    /*  if (location.pathname == '/ingame') {
-         let counter = 0
-         const interval = setInterval(() => {
-             counter++
-             if (counter == 3) {
-                 handleRoute("/result")
-             }
-         })
-         return interval
-     } */ /*    'redirect'      */ if (location.pathname == '/') goTo('/home');
+    location.host.includes("github.io") || "/";
+    goTo("/desafio-5/home");
+    if (location.pathname == '/') goTo('/home');
     else handleRoute(location.pathname);
     window.onpopstate = function() {
         handleRoute(location.pathname);
@@ -868,8 +855,21 @@ function initGamePage(params) {
     const div = document.createElement("div");
     div.className = "container";
     div.innerHTML = `\n    <h2 class="title"> ¡Elige una opción!</h2>\n    <div class="timer-container">\n    <the-timer id="timer"></the-timer> \n    </div>\n    <p class="your-move">tu jugada :</p>\n    <p class="move-receptor">${currentState.currentGame.playerMove}</p>\n    <div class="hands-container">\n    <rps-hands></rps-hands>\n    </div>\n    `;
-    /*  const pEl = div.querySelector(".move-receptor");
-     const pElContent = pEl.textContent = currentState.currentGame.playerMove */ function goToResultsPage() {
+    _state.state.suscribe(()=>{
+        const pEl = div.querySelector(".move-receptor");
+        const pElContent = pEl.textContent = currentState.currentGame.playerMove;
+    });
+    const moves = [
+        "piedra",
+        "papel",
+        "tijeras"
+    ];
+    let move = moves[Math.floor(Math.random() * moves.length)];
+    _state.state.suscribe(()=>{
+        _state.state.setComputerMove(move);
+    });
+    _state.state.result(currentState.playerMove, currentState.computerMove);
+    function goToResultsPage() {
         setTimeout(()=>{
             params.goTo("/result");
         }, 5000);
@@ -884,26 +884,35 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initResultPage", ()=>initResultPage
 );
 var _state = require("../../state");
+const winURL = require("url:../../images/youWin.png");
+const loseURL = require("url:../../images/youLose.png");
+const tieURL = require("url:../../images/tie-game.jpg");
 function initResultPage(params) {
-    const currentState = _state.state.getState();
-    const winURL = require("url:../../images/youWin.png");
-    const loseURL = require("url:../../images/youLose.png");
-    const tieURL = require("url:../../images/tie-game.jpg");
+    /*  const imgAtt = imgEl.getAttribute("src");
+     const imgEl = div.querySelector(".win-img");
+     if (state.data.winner = "player") {
+          = winURL;
+         console.log("hola");
+     }
+     if (state.data.winner = "computer") {
+         imgAtt = loseURL;
+     }
+     if (state.data.winner = '') {
+         imgAtt = tieURL;
+     } */ const currentState = _state.state.getState();
+    console.log(currentState);
     const div = document.createElement('div');
-    div.innerHTML = `\n        <div class="result-container">\n            <img class="win-img" src="${winURL}">\n        </div>\n        <div class="content">\n            <div class="scoreboard-container">\n                <h4 class="scoreboard__title">Puntaje</h4>\n                <p class="scoreboard__player">Vos :</p>\n                <p class="scoreboard__computer">Máquina :</p>\n            </div>\n            <div class="butt-container">\n                <my-button id="play-again-button">Volver a jugar</my-button>\n            </div>\n        </div>\n    `;
+    div.innerHTML = `\n    <div class="result-container">\n    <img class="win-img" src="${winURL}">\n    </div>\n    <div class="content">\n    <div class="scoreboard-container">\n    <h4 class="scoreboard__title">Puntaje</h4>\n    <p class="scoreboard__player">Vos :${currentState.playerScore}</p>\n    <p class="scoreboard__computer">Máquina:${currentState.computerScore}</p>\n    </div>\n    <div class="butt-container">\n    <my-button id="play-again-button">Volver a jugar</my-button>\n    </div>\n    </div>\n    `;
+    /* Esto no se si es necesario */ _state.state.suscribe(()=>{
+        const playerScore = div.querySelector(".scoreboard__player");
+        playerScore.textContent = _state.state.data.toString();
+        const computerScore = div.querySelector(".scoreboard__computer");
+        computerScore.textContent = _state.state.data.computerScore.toString();
+    });
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
         params.goTo("/ingame");
     });
-    console.log("current state", currentState);
-    const imgEl = div.querySelector(".win-img");
-    let imgAtt = imgEl.getAttribute("src");
-    console.log(imgAtt);
-    currentState.winner = "player";
-    imgAtt = winURL;
-    currentState.winner = "computer";
-    imgAtt = loseURL;
-    currentState.winner = '';
     return div;
 }
 
@@ -917,7 +926,10 @@ module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "youLos
 module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "tie-game.8a945947.jpg";
 
 },{"./helpers/bundle-url":"8YnfL"}],"8oWzC":[function(require,module,exports) {
+var _state = require("./state");
+const currentState = _state.state.getState();
+console.log(_state.state.data.winner);
 
-},{}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
+},{"./state":"28XHA"}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
 
 //# sourceMappingURL=index.b31310b1.js.map

@@ -15,12 +15,22 @@ export function initGamePage(params) {
     <rps-hands></rps-hands>
     </div>
     `;
-    /*  const pEl = div.querySelector(".move-receptor");
-     const pElContent = pEl.textContent = currentState.currentGame.playerMove */
+    state.suscribe(() => {
+        const pEl = div.querySelector(".move-receptor");
+        const pElContent = pEl.textContent = currentState.currentGame.playerMove
+    });
+
+    const moves = ["piedra", "papel", "tijeras"];
+    let move = moves[Math.floor(Math.random() * moves.length)];
+    state.suscribe(() => {
+        state.setComputerMove(move);
+    });
+
+    state.result(currentState.playerMove, currentState.computerMove);
 
     function goToResultsPage() {
         setTimeout(() => {
-            params.goTo("/result")
+            params.goTo("/result");
         }, 5000)
     }
     goToResultsPage();

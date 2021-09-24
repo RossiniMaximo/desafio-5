@@ -53,6 +53,9 @@ export function initRouter(container: Element) {
      } */
 
     /*    'redirect'      */
+    if (location.host.includes("github.io") || "/") {
+        goTo("/desafio-5/home");
+    }
     if (location.pathname == '/') {
         goTo('/home');
     } else {

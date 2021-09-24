@@ -29,7 +29,6 @@ class Hands extends HTMLElement {
                 ...state,
                 currentState,
             })
-            console.log(currentState);
             /* console.log("piedra", state.data.currentGame.playerMove); */
         })
         const papelId = this.shadow.querySelector("#papel")

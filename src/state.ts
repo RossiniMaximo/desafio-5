@@ -1,3 +1,5 @@
+import { initResultPage } from "./pages/result";
+
 type Move = "tijeras" | "papel" | "piedra"
 type Game = ""
 
@@ -7,13 +9,21 @@ const state = {
             playerMove: "",
             computerMove: ""
         },
-        winner: ""
+        winner: "",
+        playerScore: 0,
+        computerScore: 0
     },
     listeners: []
     ,
-    playerScore: 0
-    ,
-    computerScore: 0
+
+    scoreCounter(winner) {
+        if (winner == "player") {
+            state.data.playerScore++
+        }
+        if (winner == "computer") {
+            state.data.computerScore++
+        }
+    }
     ,
     getState() {
         return this.data
@@ -29,41 +39,34 @@ const state = {
     suscribe(callback: (any) => any) {
         this.listeners.push(callback);
     },
-    pushToHistory(game: Game) {
-        const currentState = this.getState();
-        currentState.history(game)
-    },
     setMove(move: Move) {
         const currentState = this.getState();
         currentState.currentGame.playerMove = move;
     },
-    Result(playerMove: Move, botMove: Move) {
-        const ganePiedra = playerMove == "piedra" && botMove == "tijeras";
-        const ganePapel = playerMove == "papel" && botMove == "piedra";
-        const ganeTijeras = playerMove == "tijeras" && botMove == "papel";
+    result(playerMove, botMove) {
+        /* playerMove = state.data.currentGame.playerMove
+        botMove = state.data.currentGame.computerMove || alternativa mas corta ||*/
+        const ganePiedra = state.data.currentGame.playerMove == "piedra" && state.data.currentGame.computerMove == "tijeras";
+        const ganePapel = state.data.currentGame.playerMove == "papel" && state.data.currentGame.computerMove == "piedra";
+        const ganeTijeras = state.data.currentGame.playerMove == "tijeras" && state.data.currentGame.computerMove == "papel";
         const gano = [ganePiedra, ganePapel, ganeTijeras].includes(true)
         if (gano == true) {
-            state.setState({
-                ...state.getState(),
-                winner: "player"
-            })
-        };
-        const botPiedra = botMove == "piedra" && playerMove == "tijeras";
-        const botPapel = botMove == "papel" && playerMove == "piedra";
-        const botTijeras = botMove == "tijeras" && playerMove == "papel";
+            state.data.winner = "player"
+            this.scoreCounter(state.data.winner);
+        }
+        const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
+        const botPapel = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "piedra";
+        const botTijeras = state.data.currentGame.computerMove == "tijeras" && state.data.currentGame.playerMove == "papel";
         const botGana = [botPiedra, botPapel, botTijeras].includes(true)
         if (botGana == true) {
-            state.setState({
-                ...state,
-                winner: "computadora"
-            })
-        };
+            state.data.winner = "computer"
+            this.scoreCounter(state.data.winner)
+
+        }
     },
-    setComputerMove(move) {
+    setComputerMove(botMove) {
         const currentState = this.getState();
-        const moves = ["piedra", "papel", "tijeras"];
-        move = moves[Math.floor(Math.random() * moves.length)];
-        currentState.currentGame.computerMove = move;
+        currentState.currentGame.computerMove = botMove
     }
 }
 export { state }
