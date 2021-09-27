@@ -33,7 +33,7 @@ export function initGamePage(params) {
 
     function goToChoices() {
         setTimeout(() => {
-            params.goTo("/\/rossinimaximo.github.io\/choices/");
+            params.goTo("/rossinimaximo.github.io\/choices/");
         }, 5000)
     }
     goToChoices();

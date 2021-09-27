@@ -469,7 +469,7 @@ var _state = require("./state");
     _router.initRouter(rootEl);
 })();
 
-},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./router":"b2iia","./prueba":"8oWzC","./components/star":"1a1ti","./state":"28XHA"}],"3uBrB":[function(require,module,exports) {
+},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./components/star":"1a1ti","./router":"b2iia","./prueba":"8oWzC","./state":"28XHA"}],"3uBrB":[function(require,module,exports) {
 class Button extends HTMLElement {
     constructor(){
         super();
@@ -768,6 +768,8 @@ class Timer extends HTMLElement {
 }
 customElements.define("the-timer", Timer);
 
+},{}],"1a1ti":[function(require,module,exports) {
+
 },{}],"b2iia":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -783,23 +785,23 @@ var _choices = require("./pages/choices");
 function initRouter(container) {
     const routes = [
         {
-            path: /\/home/,
+            path: /\/rossinimaximo.github.io\/home/,
             component: _home.initHomePage
         },
         {
-            path: /\/rules/,
+            path: /\/rossinimaximo.github.io\/rules/,
             component: _rules.initRules /* initRulesPage */ 
         },
         {
-            path: /\/ingame/,
+            path: /\/rossinimaximo.github.io\/ingame/,
             component: _ingamePage.initGamePage /* initGamePage */ 
         },
         {
-            path: /\/choices/,
+            path: /\/rossinimaximo.github.io\/choices/,
             component: _choices.initChoices /* initGamePage */ 
         },
         {
-            path: /\/result/,
+            path: /\/rossinimaximo.github.io\/result/,
             component: _result.initResultPage /* initResultPage */ 
         }
     ];
@@ -818,14 +820,14 @@ function initRouter(container) {
         }
     }
     if (location.host.includes("github.io")) goTo("/desafio-apx/home");
-    if (location.pathname == '/') goTo('/home');
+    if (location.pathname == '/') goTo('/rossinimaximo.github.io\/home/');
     else handleRoute(location.pathname);
     window.onpopstate = function() {
         handleRoute(location.pathname);
     };
 }
 
-},{"./pages/home":"jrMbi","./pages/rules":"dOTNr","./pages/ingamePage":"i55yI","./pages/result":"hvnGp","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./pages/choices":"h7GcF"}],"jrMbi":[function(require,module,exports) {
+},{"./pages/home":"jrMbi","./pages/rules":"dOTNr","./pages/ingamePage":"i55yI","./pages/result":"hvnGp","./pages/choices":"h7GcF","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jrMbi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHomePage", ()=>initHomePage
@@ -836,7 +838,7 @@ function initHomePage(params) {
     div.innerHTML = `\n        <div  class="title-container">\n            <h1 class="piedra">Piedra</h1>\n            <span class="papel">Papel <span class="o-word">ó</span></span>\n            <span class="tijera">Tijera</span>\n        </div>\n        <div class="b-container">\n            <my-button id="button-id">Comenzar</my-button>\n        </div>\n        <div class="container-hands">\n            <rps-hands class="hola"></rps-hands>\n        </div>\n    `;
     const buttonEl = div.querySelector("#button-id");
     buttonEl.addEventListener("click", (e)=>{
-        params.goTo("/rules");
+        params.goTo("/rossinimaximo.github.io\/rules/");
     });
     return div;
 }
@@ -852,7 +854,7 @@ function initRules(params) {
     div.innerHTML = `\n        <div class="text-container">\n            <p class="text">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos .</p>\n        </div>\n        <div class="button-container">\n            <my-button id="button">¡Jugar!</my-button>\n        </div>\n        <div class="img-container">\n            <rps-hands></rps-hands>\n        </div>\n\n    `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", ()=>{
-        params.goTo("/ingame");
+        params.goTo("/rossinimaximo.github.io\/ingame/");
     });
     return div;
 /* estaba por añadirle styles a los containers */ }
@@ -886,7 +888,7 @@ function initGamePage(params) {
     });
     function goToChoices() {
         setTimeout(()=>{
-            params.goTo("/choices");
+            params.goTo("/rossinimaximo.github.io\/choices/");
         }, 5000);
     }
     goToChoices();
@@ -922,19 +924,19 @@ function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
-        params.goTo("/ingame");
+        params.goTo("/rossinimaximo.github.io\/ingame/");
     });
     return div;
 }
 
-},{"../../state":"28XHA","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","url:../../images/star.png":"d8V6h","url:../../images/Star2.png":"kAKt1"}],"4Cym7":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "tie-game.8a945947.jpg";
-
-},{"./helpers/bundle-url":"8YnfL"}],"d8V6h":[function(require,module,exports) {
+},{"../../state":"28XHA","url:../../images/star.png":"d8V6h","url:../../images/Star2.png":"kAKt1","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"d8V6h":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "star.4f11a84e.png";
 
 },{"./helpers/bundle-url":"8YnfL"}],"kAKt1":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "Star2.eeca3e61.png";
+
+},{"./helpers/bundle-url":"8YnfL"}],"4Cym7":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "tie-game.8a945947.jpg";
 
 },{"./helpers/bundle-url":"8YnfL"}],"h7GcF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -960,17 +962,16 @@ function initChoices(params) {
         playerimgEl.setAttribute("src", papelURL);
     }
     showChoices();
-    /* console.log("Desp de la funcion", playerimgEl); */ /*  function goToResultsPage() {
-         setTimeout(() => {
-             params.goTo("/result");
-         }, 2000)
-     }
-     goToResultsPage() */ return div;
+    /* console.log("Desp de la funcion", playerimgEl); */ function goToResultsPage() {
+        setTimeout(()=>{
+            params.goTo("/rossinimaximo.github.io\/result/");
+        }, 2000);
+    }
+    goToResultsPage();
+    return div;
 }
 
 },{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8oWzC":[function(require,module,exports) {
-
-},{}],"1a1ti":[function(require,module,exports) {
 
 },{}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
 

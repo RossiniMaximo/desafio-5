@@ -10,7 +10,7 @@ import { initChoices } from "./pages/choices"
 export function initRouter(container: Element) {
     const routes = [
         {
-            path: /\/home/,
+            path: /\/rossinimaximo.github.io\/home/,
             component: initHomePage
         },
         {
@@ -51,7 +51,7 @@ export function initRouter(container: Element) {
         goTo("/desafio-apx/home");
     }
     if (location.pathname == '/') {
-        goTo('/home');
+        goTo('/rossinimaximo.github.io\/home/');
     } else {
         handleRoute(location.pathname);
     };

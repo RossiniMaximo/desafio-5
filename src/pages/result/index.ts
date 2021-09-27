@@ -40,7 +40,7 @@ export function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button")
     buttonEl.addEventListener("click", () => {
-        params.goTo("//\/rossinimaximo.github.io\/ingame/")
+        params.goTo("/rossinimaximo.github.io\/ingame/")
     })
 
     return div
