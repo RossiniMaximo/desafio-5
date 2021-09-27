@@ -51,15 +51,13 @@ export function initRouter(container: Element) {
         }
     }
 
-    if (location.pathname == '/') {
-        goTo('/home');
+    if (location.host.includes("github.io")) {
+        goTo("/desafio-apx");
     } else {
         handleRoute(location.pathname);
     };
     window.onpopstate = function () {
         handleRoute(location.pathname);
     };
-    if (location.host.includes("github.io")) {
-        goTo("/desafio-apx");
-    }
+
 }
