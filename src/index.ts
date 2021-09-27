@@ -4,7 +4,6 @@ import "./components/hands"
 import "./components/timer"
 import "./components/star"
 import { initRouter } from "./router";
-import "./prueba"
 import { state } from "./state"
 (function () {
     state.initStorage();

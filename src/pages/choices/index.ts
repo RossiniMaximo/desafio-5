@@ -18,8 +18,6 @@ export function initChoices(params) {
     `;
 
     const playerimgEl = div.querySelector("#player-move");
-    console.log(playerimgEl.src);
-
 
     if (state.data.currentGame.playerMove == "piedra") {
         playerimgEl.src = piedraURL;
@@ -32,7 +30,6 @@ export function initChoices(params) {
         console.log("hola soy tijeras");
 
     };
-
     const botimgEl = div.querySelector("#computer-move");
 
     if (state.data.currentGame.computerMove == "piedra") {
@@ -45,15 +42,12 @@ export function initChoices(params) {
     if (state.data.currentGame.computerMove == "tijeras") {
         botimgEl.src = tijerasURL
         console.log("hola soy tijeras");
-
     };
-
     function goToResultsPage() {
         setTimeout(() => {
             params.goTo("/result");
         }, 2000)
     }
     goToResultsPage()
-
     return div
 }

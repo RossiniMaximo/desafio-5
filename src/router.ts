@@ -27,7 +27,7 @@ export function initRouter(container: Element) {
         },
         {
             path: /\/choices/,
-            component: initChoices  /* initGamePage */
+            component: initChoices
         },
         {
             path: /\/result/,
