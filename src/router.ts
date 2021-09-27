@@ -14,19 +14,19 @@ export function initRouter(container: Element) {
             component: initHomePage
         },
         {
-            path: /\/rules/,
+            path: /\/rossinimaximo.github.io\/rules/,
             component: initRules /* initRulesPage */
         },
         {
-            path: /\/ingame/,
+            path: /\/rossinimaximo.github.io\/ingame/,
             component: initGamePage  /* initGamePage */
         },
         {
-            path: /\/choices/,
+            path: /\/rossinimaximo.github.io\/choices/,
             component: initChoices  /* initGamePage */
         },
         {
-            path: /\/result/,
+            path: /\/rossinimaximo.github.io\/result/,
             component: initResultPage  /* initResultPage */
         }
     ]

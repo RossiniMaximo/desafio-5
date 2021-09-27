@@ -16,7 +16,7 @@ export function initHomePage(params) {
     `
     const buttonEl = div.querySelector("#button-id");
     buttonEl.addEventListener("click", (e) => {
-        params.goTo("/rules")
+        params.goTo("//\/rossinimaximo.github.io\/rules/")
     })
 
     return div
