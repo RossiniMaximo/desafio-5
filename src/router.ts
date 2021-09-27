@@ -5,6 +5,7 @@ import { initHomePage } from "./pages/home"
 import { initRules } from "./pages/rules"
 import { initGamePage } from "./pages/ingamePage"
 import { initResultPage } from "./pages/result"
+import { initChoices } from "./pages/choices"
 
 export function initRouter(container: Element) {
     const routes = [
@@ -19,6 +20,10 @@ export function initRouter(container: Element) {
         {
             path: /\/ingame/,
             component: initGamePage  /* initGamePage */
+        },
+        {
+            path: /\/choices/,
+            component: initChoices  /* initGamePage */
         },
         {
             path: /\/result/,
@@ -41,20 +46,9 @@ export function initRouter(container: Element) {
             }
         }
     }
-    /*  if (location.pathname == '/ingame') {
-         let counter = 0
-         const interval = setInterval(() => {
-             counter++
-             if (counter == 3) {
-                 handleRoute("/result")
-             }
-         })
-         return interval
-     } */
 
-    /*    'redirect'      */
-    if (location.host.includes("github.io") || "/") {
-        goTo("/desafio-5/home");
+    if (location.host.includes("github.io")) {
+        goTo("/desafio-apx/home");
     }
     if (location.pathname == '/') {
         goTo('/home');

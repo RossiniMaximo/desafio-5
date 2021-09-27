@@ -26,13 +26,16 @@ export function initGamePage(params) {
         state.setComputerMove(move);
     });
 
-    state.result(currentState.playerMove, currentState.computerMove);
+    state.suscribe(() => {
+        state.result(currentState.playerMove, currentState.computerMove);
+    })
 
-    function goToResultsPage() {
+
+    function goToChoices() {
         setTimeout(() => {
-            params.goTo("/result");
+            params.goTo("/choices");
         }, 5000)
     }
-    goToResultsPage();
+    goToChoices();
     return div
 }

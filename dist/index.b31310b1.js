@@ -459,15 +459,17 @@ var _button = require("./components/button");
 var _logo = require("./components/logo");
 var _hands = require("./components/hands");
 var _timer = require("./components/timer");
+var _star = require("./components/star");
 var _router = require("./router");
 var _prueba = require("./prueba");
-function main() {
+var _state = require("./state");
+(function() {
+    _state.state.initStorage();
     const rootEl = document.querySelector(".root");
     _router.initRouter(rootEl);
-}
-main();
+})();
 
-},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./router":"b2iia","./prueba":"8oWzC"}],"3uBrB":[function(require,module,exports) {
+},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./router":"b2iia","./prueba":"8oWzC","./components/star":"1a1ti","./state":"28XHA"}],"3uBrB":[function(require,module,exports) {
 class Button extends HTMLElement {
     constructor(){
         super();
@@ -570,7 +572,7 @@ class Hands extends HTMLElement {
         this.render();
     }
     handsLogic() {
-        const currentState = _state.state.getState();
+        const lastState = _state.state.getState();
         const piedraId = this.shadow.querySelector("#piedra");
         piedraId.addEventListener("click", ()=>{
             piedraId.classList.remove("blur");
@@ -578,8 +580,7 @@ class Hands extends HTMLElement {
             papelId.classList.add("blur");
             _state.state.setMove("piedra");
             _state.state.setState({
-                ..._state.state,
-                currentState
+                ...lastState
             });
         /* console.log("piedra", state.data.currentGame.playerMove); */ });
         const papelId = this.shadow.querySelector("#papel");
@@ -589,8 +590,7 @@ class Hands extends HTMLElement {
             tijerasId.classList.add("blur");
             _state.state.setMove("papel");
             _state.state.setState({
-                ..._state.state,
-                currentState
+                ...lastState
             });
         /* console.log("papel", state.data); */ });
         const tijerasId = this.shadow.querySelector("#tijeras");
@@ -600,8 +600,7 @@ class Hands extends HTMLElement {
             piedraId.classList.add("blur");
             _state.state.setMove("tijeras");
             _state.state.setState({
-                ..._state.state,
-                currentState
+                ...lastState
             });
         /* console.log("tijeras", state.data); */ });
     }
@@ -636,6 +635,11 @@ const state = {
         computerScore: 0
     },
     listeners: [],
+    initStorage () {
+        const localData = localStorage.getItem("user-state");
+        const parsedData = JSON.parse(localData);
+        this.setState(parsedData);
+    },
     scoreCounter (winner) {
         if (winner == "player") state.data.playerScore++;
         if (winner == "computer") state.data.computerScore++;
@@ -644,9 +648,9 @@ const state = {
         return this.data;
     },
     setState (newState) {
-        const currentState = this.getState();
-        currentState.data = newState;
+        this.data = newState;
         for (const cb of this.listeners)cb(newState);
+        localStorage.setItem("user-state", JSON.stringify(newState));
         console.log("Soy el state he cambiado", this.data);
     },
     suscribe (callback) {
@@ -654,6 +658,7 @@ const state = {
     },
     setMove (move) {
         const currentState = this.getState();
+        currentState.currentGame.playerMove = "";
         currentState.currentGame.playerMove = move;
     },
     result (playerMove, botMove) {
@@ -667,6 +672,7 @@ const state = {
             ganeTijeras
         ].includes(true);
         if (gano == true) {
+            state.data.winner = "";
             state.data.winner = "player";
             this.scoreCounter(state.data.winner);
         }
@@ -679,12 +685,15 @@ const state = {
             botTijeras
         ].includes(true);
         if (botGana == true) {
+            state.data.winner = "";
             state.data.winner = "computer";
             this.scoreCounter(state.data.winner);
         }
+        if (gano == false && botGana == false) state.data.winner = "";
     },
     setComputerMove (botMove) {
         const currentState = this.getState();
+        currentState.currentGame.computerMove = "";
         currentState.currentGame.computerMove = botMove;
     }
 };
@@ -770,6 +779,7 @@ parcelHelpers.export(exports, "initRouter", ()=>initRouter
 var _rules = require("./pages/rules");
 var _ingamePage = require("./pages/ingamePage");
 var _result = require("./pages/result");
+var _choices = require("./pages/choices");
 function initRouter(container) {
     const routes = [
         {
@@ -783,6 +793,10 @@ function initRouter(container) {
         {
             path: /\/ingame/,
             component: _ingamePage.initGamePage /* initGamePage */ 
+        },
+        {
+            path: /\/choices/,
+            component: _choices.initChoices /* initGamePage */ 
         },
         {
             path: /\/result/,
@@ -803,8 +817,7 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    location.host.includes("github.io") || "/";
-    goTo("/desafio-5/home");
+    if (location.host.includes("github.io")) goTo("/desafio-apx/home");
     if (location.pathname == '/') goTo('/home');
     else handleRoute(location.pathname);
     window.onpopstate = function() {
@@ -812,7 +825,7 @@ function initRouter(container) {
     };
 }
 
-},{"./pages/home":"jrMbi","./pages/rules":"dOTNr","./pages/ingamePage":"i55yI","./pages/result":"hvnGp","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jrMbi":[function(require,module,exports) {
+},{"./pages/home":"jrMbi","./pages/rules":"dOTNr","./pages/ingamePage":"i55yI","./pages/result":"hvnGp","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","./pages/choices":"h7GcF"}],"jrMbi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHomePage", ()=>initHomePage
@@ -868,13 +881,15 @@ function initGamePage(params) {
     _state.state.suscribe(()=>{
         _state.state.setComputerMove(move);
     });
-    _state.state.result(currentState.playerMove, currentState.computerMove);
-    function goToResultsPage() {
+    _state.state.suscribe(()=>{
+        _state.state.result(currentState.playerMove, currentState.computerMove);
+    });
+    function goToChoices() {
         setTimeout(()=>{
-            params.goTo("/result");
+            params.goTo("/choices");
         }, 5000);
     }
-    goToResultsPage();
+    goToChoices();
     return div;
 }
 
@@ -884,31 +899,27 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initResultPage", ()=>initResultPage
 );
 var _state = require("../../state");
-const winURL = require("url:../../images/youWin.png");
-const loseURL = require("url:../../images/youLose.png");
+const winURL = require("url:../../images/star.png");
+const loseURL = require("url:../../images/Star2.png");
 const tieURL = require("url:../../images/tie-game.jpg");
 function initResultPage(params) {
-    /*  const imgAtt = imgEl.getAttribute("src");
-     const imgEl = div.querySelector(".win-img");
-     if (state.data.winner = "player") {
-          = winURL;
-         console.log("hola");
-     }
-     if (state.data.winner = "computer") {
-         imgAtt = loseURL;
-     }
-     if (state.data.winner = '') {
-         imgAtt = tieURL;
-     } */ const currentState = _state.state.getState();
-    console.log(currentState);
+    const currentState = _state.state.getState();
     const div = document.createElement('div');
-    div.innerHTML = `\n    <div class="result-container">\n    <img class="win-img" src="${winURL}">\n    </div>\n    <div class="content">\n    <div class="scoreboard-container">\n    <h4 class="scoreboard__title">Puntaje</h4>\n    <p class="scoreboard__player">Vos :${currentState.playerScore}</p>\n    <p class="scoreboard__computer">Máquina:${currentState.computerScore}</p>\n    </div>\n    <div class="butt-container">\n    <my-button id="play-again-button">Volver a jugar</my-button>\n    </div>\n    </div>\n    `;
-    /* Esto no se si es necesario */ _state.state.suscribe(()=>{
-        const playerScore = div.querySelector(".scoreboard__player");
-        playerScore.textContent = _state.state.data.toString();
-        const computerScore = div.querySelector(".scoreboard__computer");
-        computerScore.textContent = _state.state.data.computerScore.toString();
-    });
+    div.innerHTML = `\n    <div class="result-img">\n        <p id="text" class="result-text">Ganaste!</p>\n        <img src=${winURL} id="image-id"class="img">\n    </div>\n    <div class="content">\n        <div class="scoreboard-container">\n            <h4 class="scoreboard__title">Puntaje</h4>\n            <p class="scoreboard__player">Vos :${currentState.playerScore}</p>\n            <p class="scoreboard__computer">Máquina:${currentState.computerScore}</p>\n        </div>\n        <div class="butt-container">\n            <my-button id="play-again-button">Volver a jugar</my-button>\n        </div>\n    </div>\n    `;
+    const imgEl = div.querySelector("#image-id");
+    const textEl = div.querySelector("#text");
+    if (currentState.winner == "player") {
+        imgEl.setAttribute("src", winURL);
+        textEl.textContent = "¡Ganaste!";
+    }
+    if (currentState.winner == "computer") {
+        imgEl.setAttribute("src", loseURL);
+        textEl.textContent = "¡Perdiste!";
+    }
+    if (currentState.winner == "") {
+        imgEl.setAttribute("src", tieURL);
+        textEl.textContent = "¡Empate!";
+    }
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
         params.goTo("/ingame");
@@ -916,20 +927,51 @@ function initResultPage(params) {
     return div;
 }
 
-},{"../../state":"28XHA","url:../../images/youWin.png":"9CIbf","url:../../images/youLose.png":"8NjMX","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"9CIbf":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "youWin.4a13df2d.png";
-
-},{"./helpers/bundle-url":"8YnfL"}],"8NjMX":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "youLose.3e32dcac.png";
-
-},{"./helpers/bundle-url":"8YnfL"}],"4Cym7":[function(require,module,exports) {
+},{"../../state":"28XHA","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","url:../../images/star.png":"d8V6h","url:../../images/Star2.png":"kAKt1"}],"4Cym7":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "tie-game.8a945947.jpg";
 
-},{"./helpers/bundle-url":"8YnfL"}],"8oWzC":[function(require,module,exports) {
-var _state = require("./state");
-const currentState = _state.state.getState();
-console.log(_state.state.data.winner);
+},{"./helpers/bundle-url":"8YnfL"}],"d8V6h":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "star.4f11a84e.png";
 
-},{"./state":"28XHA"}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
+},{"./helpers/bundle-url":"8YnfL"}],"kAKt1":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "Star2.eeca3e61.png";
+
+},{"./helpers/bundle-url":"8YnfL"}],"h7GcF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initChoices", ()=>initChoices
+);
+var _state = require("../../state");
+const piedraURL = require("url:../../images/piedra.png");
+const papelURL = require("url:../../images/papel.png");
+const tijerasURL = require("url:../../images/tijera.png");
+function initChoices(params) {
+    const lastState = _state.state.getState();
+    console.log("soy el lastState", _state.state.data.currentGame.playerMove);
+    const div = document.createElement('div');
+    div.className = "container-choices";
+    div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""}} class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} class="player-choice__img" id="player-move">\n        </div>\n    `;
+    const playerimgEl = div.querySelector("#player-move");
+    /* console.log(playerimgEl); */ function showChoices() {
+        if (lastState.playerMove == "tijeras") playerimgEl.setAttribute("src", tijerasURL);
+        lastState.playerMove = "piedra";
+        playerimgEl.setAttribute("src", piedraURL);
+        lastState.playerMove = "papel";
+        playerimgEl.setAttribute("src", papelURL);
+    }
+    showChoices();
+    /* console.log("Desp de la funcion", playerimgEl); */ /*  function goToResultsPage() {
+         setTimeout(() => {
+             params.goTo("/result");
+         }, 2000)
+     }
+     goToResultsPage() */ return div;
+}
+
+},{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8oWzC":[function(require,module,exports) {
+
+},{}],"1a1ti":[function(require,module,exports) {
+
+},{}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
 
 //# sourceMappingURL=index.b31310b1.js.map
