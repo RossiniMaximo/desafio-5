@@ -14,6 +14,10 @@ export function initRouter(container: Element) {
             component: initHomePage
         },
         {
+            path: /\/desafio-apx/,
+            handler: initHomePage,
+        },
+        {
             path: /\/rules/,
             component: initRules /* initRulesPage */
         },
@@ -47,9 +51,6 @@ export function initRouter(container: Element) {
         }
     }
 
-    if (location.host.includes("github.io")) {
-        goTo("/desafio-apx/home");
-    }
     if (location.pathname == '/') {
         goTo('/home');
     } else {
@@ -58,4 +59,7 @@ export function initRouter(container: Element) {
     window.onpopstate = function () {
         handleRoute(location.pathname);
     };
+    if (location.host.includes("github.io")) {
+        goTo("/desafio-apx");
+    }
 }
