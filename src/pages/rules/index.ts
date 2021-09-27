@@ -15,7 +15,7 @@ export function initRules(params) {
     `
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", () => {
-        params.goTo("/rossinimaximo.github.io\/ingame/")
+        params.goTo("/ingame")
     })
     return div
     /* estaba por añadirle styles a los containers */

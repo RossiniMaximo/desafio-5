@@ -37,12 +37,12 @@ export function initChoices(params) {
     /* console.log("Desp de la funcion", playerimgEl); */
 
 
-    function goToResultsPage() {
+    /* function goToResultsPage() {
         setTimeout(() => {
-            params.goTo("/rossinimaximo.github.io\/result/");
+            params.goTo("/result");
         }, 2000)
     }
-    goToResultsPage()
+    goToResultsPage() */
 
     return div
 }

@@ -10,23 +10,23 @@ import { initChoices } from "./pages/choices"
 export function initRouter(container: Element) {
     const routes = [
         {
-            path: /\/rossinimaximo.github.io\/home/,
+            path: /\/home/,
             component: initHomePage
         },
         {
-            path: /\/rossinimaximo.github.io\/rules/,
+            path: /\/rules/,
             component: initRules /* initRulesPage */
         },
         {
-            path: /\/rossinimaximo.github.io\/ingame/,
+            path: /\/ingame/,
             component: initGamePage  /* initGamePage */
         },
         {
-            path: /\/rossinimaximo.github.io\/choices/,
+            path: /\/choices/,
             component: initChoices  /* initGamePage */
         },
         {
-            path: /\/rossinimaximo.github.io\/result/,
+            path: /\/result/,
             component: initResultPage  /* initResultPage */
         }
     ]
@@ -51,7 +51,7 @@ export function initRouter(container: Element) {
         goTo("/desafio-apx/home");
     }
     if (location.pathname == '/') {
-        goTo('/rossinimaximo.github.io\/home/');
+        goTo('/home');
     } else {
         handleRoute(location.pathname);
     };
