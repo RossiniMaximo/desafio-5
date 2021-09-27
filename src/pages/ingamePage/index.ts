@@ -18,15 +18,10 @@ export function initGamePage(params) {
     state.suscribe(() => {
         const pEl = div.querySelector(".move-receptor");
         const pElContent = pEl.textContent = currentState.currentGame.playerMove
-    });
-
-    const moves = ["piedra", "papel", "tijeras"];
-    let move = moves[Math.floor(Math.random() * moves.length)];
-    state.suscribe(() => {
+        const moves = ["piedra", "papel", "tijeras"];
+        let move = moves[Math.floor(Math.random() * moves.length)];
+        state.data.currentGame.computerMove = "";
         state.setComputerMove(move);
-    });
-
-    state.suscribe(() => {
         state.result(currentState.playerMove, currentState.computerMove);
     })
 

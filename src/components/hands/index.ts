@@ -13,20 +13,22 @@ class Hands extends HTMLElement {
         this.handsLogic();
     }
     syncWithState() {
-        const lastState = state.getState();
-        this.move = lastState.playerMove
         this.render()
     }
     handsLogic() {
         const lastState = state.getState();
+        lastState.playerMove = "";
+        lastState.computerMove = "";
+        console.log("soy el laststate de la pagina hands", lastState);
         const piedraId = this.shadow.querySelector("#piedra")
         piedraId.addEventListener("click", () => {
             piedraId.classList.remove("blur")
             tijerasId.classList.add("blur")
             papelId.classList.add("blur")
+            state.data.currentGame.playerMove = ""
             state.setMove("piedra")
             state.setState({
-                ...lastState,
+                ...lastState
 
             })
             /* console.log("piedra", state.data.currentGame.playerMove); */
@@ -36,9 +38,11 @@ class Hands extends HTMLElement {
             papelId.classList.remove("blur")
             piedraId.classList.add("blur")
             tijerasId.classList.add("blur")
+            state.data.currentGame.playerMove = ""
             state.setMove("papel")
             state.setState({
-                ...lastState,
+                ...lastState
+
 
             })
             /* console.log("papel", state.data); */
@@ -50,7 +54,7 @@ class Hands extends HTMLElement {
             piedraId.classList.add("blur")
             state.setMove("tijeras")
             state.setState({
-                ...lastState,
+                ...lastState
 
             })
             /* console.log("tijeras", state.data); */

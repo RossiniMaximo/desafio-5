@@ -567,17 +567,19 @@ class Hands extends HTMLElement {
         this.handsLogic();
     }
     syncWithState() {
-        const lastState = _state.state.getState();
-        this.move = lastState.playerMove;
         this.render();
     }
     handsLogic() {
         const lastState = _state.state.getState();
+        lastState.playerMove = "";
+        lastState.computerMove = "";
+        console.log("soy el laststate de la pagina hands", lastState);
         const piedraId = this.shadow.querySelector("#piedra");
         piedraId.addEventListener("click", ()=>{
             piedraId.classList.remove("blur");
             tijerasId.classList.add("blur");
             papelId.classList.add("blur");
+            _state.state.data.currentGame.playerMove = "";
             _state.state.setMove("piedra");
             _state.state.setState({
                 ...lastState
@@ -588,6 +590,7 @@ class Hands extends HTMLElement {
             papelId.classList.remove("blur");
             piedraId.classList.add("blur");
             tijerasId.classList.add("blur");
+            _state.state.data.currentGame.playerMove = "";
             _state.state.setMove("papel");
             _state.state.setState({
                 ...lastState
@@ -873,17 +876,14 @@ function initGamePage(params) {
     _state.state.suscribe(()=>{
         const pEl = div.querySelector(".move-receptor");
         const pElContent = pEl.textContent = currentState.currentGame.playerMove;
-    });
-    const moves = [
-        "piedra",
-        "papel",
-        "tijeras"
-    ];
-    let move = moves[Math.floor(Math.random() * moves.length)];
-    _state.state.suscribe(()=>{
+        const moves = [
+            "piedra",
+            "papel",
+            "tijeras"
+        ];
+        let move = moves[Math.floor(Math.random() * moves.length)];
+        _state.state.data.currentGame.computerMove = "";
         _state.state.setComputerMove(move);
-    });
-    _state.state.suscribe(()=>{
         _state.state.result(currentState.playerMove, currentState.computerMove);
     });
     function goToChoices() {
@@ -948,26 +948,34 @@ const piedraURL = require("url:../../images/piedra.png");
 const papelURL = require("url:../../images/papel.png");
 const tijerasURL = require("url:../../images/tijera.png");
 function initChoices(params) {
-    const lastState = _state.state.getState();
-    console.log("soy el lastState", _state.state.data.currentGame.playerMove);
     const div = document.createElement('div');
     div.className = "container-choices";
-    div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""}} class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} class="player-choice__img" id="player-move">\n        </div>\n    `;
+    div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""} ; class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} ; class="player-choice__img" id="player-move">\n        </div>\n    `;
     const playerimgEl = div.querySelector("#player-move");
-    /* console.log(playerimgEl); */ function showChoices() {
-        if (lastState.playerMove == "tijeras") playerimgEl.setAttribute("src", tijerasURL);
-        lastState.playerMove = "piedra";
-        playerimgEl.setAttribute("src", piedraURL);
-        lastState.playerMove = "papel";
-        playerimgEl.setAttribute("src", papelURL);
+    console.log(playerimgEl.src);
+    if (_state.state.data.currentGame.playerMove == "piedra") playerimgEl.src = piedraURL;
+    if (_state.state.data.currentGame.playerMove == "papel") playerimgEl.src = papelURL;
+    if (_state.state.data.currentGame.playerMove == "tijeras") {
+        playerimgEl.src = tijerasURL;
+        console.log("hola soy tijeras");
     }
-    showChoices();
-    /* console.log("Desp de la funcion", playerimgEl); */ /* function goToResultsPage() {
-        setTimeout(() => {
+    const botimgEl = div.querySelector("#computer-move");
+    if (_state.state.data.currentGame.computerMove == "piedra") {
+        botimgEl.src = piedraURL;
+        botimgEl.setAttribute("src", piedraURL);
+    }
+    if (_state.state.data.currentGame.computerMove == "papel") botimgEl.src = papelURL;
+    if (_state.state.data.currentGame.computerMove == "tijeras") {
+        botimgEl.src = tijerasURL;
+        console.log("hola soy tijeras");
+    }
+    function goToResultsPage() {
+        setTimeout(()=>{
             params.goTo("/result");
-        }, 2000)
+        }, 2000);
     }
-    goToResultsPage() */ return div;
+    goToResultsPage();
+    return div;
 }
 
 },{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8oWzC":[function(require,module,exports) {
