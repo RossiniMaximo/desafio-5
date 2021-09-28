@@ -461,7 +461,6 @@ var _hands = require("./components/hands");
 var _timer = require("./components/timer");
 var _star = require("./components/star");
 var _router = require("./router");
-var _prueba = require("./prueba");
 var _state = require("./state");
 (function() {
     _state.state.initStorage();
@@ -469,7 +468,7 @@ var _state = require("./state");
     _router.initRouter(rootEl);
 })();
 
-},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./components/star":"1a1ti","./router":"b2iia","./prueba":"8oWzC","./state":"28XHA"}],"3uBrB":[function(require,module,exports) {
+},{"./components/button":"3uBrB","./components/logo":"ejQX9","./components/hands":"lFlAb","./components/timer":"df3Uf","./components/star":"1a1ti","./router":"b2iia","./state":"28XHA"}],"3uBrB":[function(require,module,exports) {
 class Button extends HTMLElement {
     constructor(){
         super();
@@ -792,20 +791,24 @@ function initRouter(container) {
             component: _home.initHomePage
         },
         {
-            path: /\/rules/,
-            component: _rules.initRules /* initRulesPage */ 
+            path: /\/desafio-apx/,
+            handler: _home.initHomePage
         },
         {
-            path: /\/ingame/,
-            component: _ingamePage.initGamePage /* initGamePage */ 
+            path: /\/rules/,
+            component: _rules.initRules
+        },
+        {
+            path: /\/ingame/s,
+            component: _ingamePage.initGamePage
         },
         {
             path: /\/choices/,
-            component: _choices.initChoices /* initGamePage */ 
+            component: _choices.initChoices
         },
         {
             path: /\/result/,
-            component: _result.initResultPage /* initResultPage */ 
+            component: _result.initResultPage
         }
     ];
     function goTo(path) {
@@ -822,9 +825,8 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    if (location.host.includes("github.io")) goTo("/desafio-apx/home");
-    if (location.pathname == '/') goTo('/home');
-    else handleRoute(location.pathname);
+    location.host.includes("github.io") || "/";
+    goTo("/desafio-apx/home");
     window.onpopstate = function() {
         handleRoute(location.pathname);
     };
@@ -841,7 +843,7 @@ function initHomePage(params) {
     div.innerHTML = `\n        <div  class="title-container">\n            <h1 class="piedra">Piedra</h1>\n            <span class="papel">Papel <span class="o-word">ó</span></span>\n            <span class="tijera">Tijera</span>\n        </div>\n        <div class="b-container">\n            <my-button id="button-id">Comenzar</my-button>\n        </div>\n        <div class="container-hands">\n            <rps-hands class="hola"></rps-hands>\n        </div>\n    `;
     const buttonEl = div.querySelector("#button-id");
     buttonEl.addEventListener("click", (e)=>{
-        params.goTo("/rules");
+        params.goTo("desafio-apx/rules");
     });
     return div;
 }
@@ -857,7 +859,7 @@ function initRules(params) {
     div.innerHTML = `\n        <div class="text-container">\n            <p class="text">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos .</p>\n        </div>\n        <div class="button-container">\n            <my-button id="button">¡Jugar!</my-button>\n        </div>\n        <div class="img-container">\n            <rps-hands></rps-hands>\n        </div>\n\n    `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", ()=>{
-        params.goTo("/ingame");
+        params.goTo("desafio-apx/ingame");
     });
     return div;
 /* estaba por añadirle styles a los containers */ }
@@ -888,7 +890,7 @@ function initGamePage(params) {
     });
     function goToChoices() {
         setTimeout(()=>{
-            params.goTo("/choices");
+            params.goTo("desafio-apx/choices");
         }, 5000);
     }
     goToChoices();
@@ -924,7 +926,7 @@ function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
-        params.goTo("/ingame");
+        params.goTo("/desafio-apx/ingame");
     });
     return div;
 }
@@ -952,7 +954,6 @@ function initChoices(params) {
     div.className = "container-choices";
     div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""} ; class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} ; class="player-choice__img" id="player-move">\n        </div>\n    `;
     const playerimgEl = div.querySelector("#player-move");
-    console.log(playerimgEl.src);
     if (_state.state.data.currentGame.playerMove == "piedra") playerimgEl.src = piedraURL;
     if (_state.state.data.currentGame.playerMove == "papel") playerimgEl.src = papelURL;
     if (_state.state.data.currentGame.playerMove == "tijeras") {
@@ -978,8 +979,6 @@ function initChoices(params) {
     return div;
 }
 
-},{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"8oWzC":[function(require,module,exports) {
-
-},{}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
+},{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}]},["8uBhv","4aleK"], "4aleK", "parcelRequireca0a")
 
 //# sourceMappingURL=index.b31310b1.js.map

@@ -11,7 +11,7 @@ export function initRouter(container: Element) {
     const routes = [
         {
             path: /\/home/,
-            component: initHomePage
+            component: initHomePage,
         },
         {
             path: /\/desafio-apx/,
@@ -19,19 +19,19 @@ export function initRouter(container: Element) {
         },
         {
             path: /\/rules/,
-            component: initRules /* initRulesPage */
+            component: initRules, /* initRulesPage */
         },
         {
-            path: /\/ingame/,
-            component: initGamePage  /* initGamePage */
+            path: /\/ingame/s,
+            component: initGamePage, /* initGamePage */
         },
         {
             path: /\/choices/,
-            component: initChoices
+            component: initChoices,
         },
         {
             path: /\/result/,
-            component: initResultPage  /* initResultPage */
+            component: initResultPage,  /* initResultPage */
         }
     ]
     function goTo(path) {
@@ -51,8 +51,8 @@ export function initRouter(container: Element) {
         }
     }
 
-    if (location.host.includes("github.io")) {
-        goTo("/desafio-apx");
+    if (location.host.includes("github.io") || "/") {
+        goTo("/desafio-apx/home");
     } else {
         handleRoute(location.pathname);
     };
