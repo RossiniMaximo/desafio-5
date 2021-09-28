@@ -28,7 +28,7 @@ export function initGamePage(params) {
 
     function goToChoices() {
         setTimeout(() => {
-            params.goTo("desafio-apx/choices");
+            params.goTo("/choices");
         }, 5000)
     }
     goToChoices();

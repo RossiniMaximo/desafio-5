@@ -1,4 +1,4 @@
-18148
+18150
 78C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\isexe\package.json132722710303870000 0
 112C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\sharp\vendor\8.10.6\include\fribidi\fribidi-config.h132612604640000000 0
 94C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\core-js\es\object\define-setter.js132769000913780000 0
@@ -37,7 +37,7 @@
 74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lodash\head.js132722710365030000 0
 81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-date-object\.nycrc132726898489150000 0
 78C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\color-name\LICENSE132722710304570000 0
-52C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build132772663497008039 1
+52C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build132772664960364622 1
 81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\htmlnano\CHANGELOG.md132769000912360000 0
 111C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\postcss-selector-parser\dist\__tests__\container.js132722710365960000 0
 78C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\async\applyEach.js132769000926230000 0
@@ -184,7 +184,7 @@
 82C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lodash\_arrayFilter.js132722710365030000 0
 68C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\mdn-data132760653133185446 1
 84C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\levn\lib\parse-string.js132722710417330000 0
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.94bb3cfb.css.map132772663496918019 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.94bb3cfb.css.map132772664960324633 0
 70C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-extglob132760653121117884 1
 79C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\graceful-fs\LICENSE132726898441110000 0
 106C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\css-color-adjust.js132769000910460000 0
@@ -4922,7 +4922,7 @@
 84C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\babylon-walk\src132760653149766800 1
 77C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lodash\fp\head.js132722710365030000 0
 99C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\core-js\stable\reflect\to-string-tag.js132769000913780000 0
-72C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\tijera.c1b7bbd5.png132772663465796775 0
+72C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\tijera.c1b7bbd5.png132772664932642425 0
 87C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\svgo\plugins\mergeStyles.js132769000912000000 0
 85C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\svgo\plugins\prefixIds.js132769000912000000 0
 102C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\svgo\plugins\removeAttributesBySelector.js132769000912000000 0
@@ -7252,7 +7252,7 @@
 93C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\core-js\modules\es.object.seal.js132769000913780000 0
 85C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\querystring-es3\Readme.md132722710422340000 0
 80C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\querystring-es3\test132760653181039342 1
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6bbcca77.css.map132772663496918019 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6bbcca77.css.map132772664960274649 0
 96C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\querystring-es3\test\common-index.js132722710422340000 0
 89C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\querystring-es3\test\index.js132722710422340000 0
 86C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\core-js\es\symbol\split.js132769000913780000 0
@@ -8231,7 +8231,7 @@
 95C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\postcss-discard-empty\dist\index.js132726898476340000 0
 91C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\postcss-discard-duplicates\dist132760653180509310 1
 82C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-string\CHANGELOG.md132726898489030000 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\Star2.dac9bc02.png132772663465796775 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\Star2.dac9bc02.png132772664932652433 0
 75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\asn1.js\LICENSE132722710439150000 0
 99C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\postcss-discard-duplicates\package.json132726898474270000 0
 100C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\postcss-discard-duplicates\dist\index.js132726898474270000 0
@@ -10633,7 +10633,7 @@
 88C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\babel-ast-utils\test132760653149716799 1
 83C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lmdb-store\dependencies132760653084673929 1
 81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lmdb-store\index.d.ts132769000905260000 0
-70C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\star.47eecdb3.png132772663465676771 0
+70C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\star.47eecdb3.png132772664932642425 0
 78C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lmdb-store\LICENSE132769000905260000 0
 74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lmdb-store\src132769000988601671 1
 91C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\lmdb-store\util\upgrade-lmdb.js132769000905260000 0
@@ -11323,7 +11323,7 @@
 79C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\has-unicode\LICENSE132762953188310002 0
 77C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\big.js\big.min.js132722710401359998 0
 78C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-regex\.eslintrc132731801817500000 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.2d2a949a.css132772663496838013 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.2d2a949a.css132772664960204620 0
 75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-regex\.nycrc132731801817500000 0
 96C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\package-manager\node_modules132769001007058965 1
 81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\is-regex\CHANGELOG.md132731801817500000 0
@@ -15900,7 +15900,7 @@
 89C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\async\internal\consoleFunc.js132769000926230000 0
 106C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\css-text-justify.js132769000910460000 0
 110C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\css-text-orientation.js132769000910460000 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6bbcca77.css132772663496838013 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6bbcca77.css132772664960194622 0
 104C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\css-textshadow.js132769000910460000 0
 112C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\form-submit-attributes.js132769000910460000 0
 108C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\css-touch-action-2.js132769000910460000 0
@@ -15967,7 +15967,7 @@
 101C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\import-maps.js132769000910460000 0
 112C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\indeterminate-checkbox.js132769000910460000 0
 99C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\indexeddb.js132769000910460000 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.9cca2c40.css132772663496848017 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.9cca2c40.css132772664960204620 0
 100C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\indexeddb2.js132769000910460000 0
 104C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\input-datetime.js132769000910460000 0
 101C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\caniuse-lite\data\features\input-event.js132769000910460000 0
@@ -16496,7 +16496,7 @@
 97C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@swc\helpers\src\_class_call_check.js132732147292340000 0
 95C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\runtime-js\src\helpers\node132760653210441733 1
 93C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@swc\helpers\src\_create_class.js132732147292340000 0
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6b3b0978.css.map132772663496968039 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6b3b0978.css.map132772664960324633 0
 89C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@swc\helpers\src\_defaults.js132732147292340000 0
 88C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@swc\helpers\src\_extends.js132732147292340000 0
 97C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@swc\helpers\src\_get_prototype_of.js132732147292340000 0
@@ -16808,7 +16808,7 @@
 109C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\parcel_sourcemap_wasm\dist-web132760653188779970 1
 110C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\parcel_sourcemap_node\artifacts132760653188699967 1
 109C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\parcel_sourcemap_node\build.js132726898441730002 0
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.9cca2c40.css.map132772663496968039 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.9cca2c40.css.map132772664960324633 0
 109C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\parcel_sourcemap_node\index.js132726898441730002 0
 134C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\parcel_sourcemap_node\artifacts\index.darwin-arm64.node132726898441730002 0
 98C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\node_modules\@parcel\source-map\node_modules\globby132769000980333606 1
@@ -18134,16 +18134,18 @@
 71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\dist\tijera.51906c81.png132772663658835844 0
 72C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\dist\youLose.3e32dcac.png132770786299989714 0
 71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\dist\youWin.4a13df2d.png132770786301539841 0
-81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\backgound-image.c03478b6.jpg132772663465676771 0
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.2d2a949a.css.map132772663496968039 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6b3b0978.css132772663496848017 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.7a0333f2.css132772663496838013 0
-75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.7a0333f2.css.map132772663496968039 0
+81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\backgound-image.c03478b6.jpg132772664932642425 0
+70C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.036ace65.js132772664960214619 0
+74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.036ace65.js.map132772664960334625 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.2d2a949a.css.map132772664960324633 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.6b3b0978.css132772664960204620 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.7a0333f2.css132772664960204620 0
+75C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.7a0333f2.css.map132772664960324633 0
 70C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.7c5b2b4c.js132772560588116746 0
 74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.84f4528b.js.map132772565550303863 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.94bb3cfb.css132772663496838013 0
-63C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.html132772663496828024 0
-71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\papel.5dad405c.png132772663465676771 0
-72C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\piedra.3e5be059.png132772663465786783 0
-81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\playingChildren.eefa2f30.png132772663465676771 0
-74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\tie-game.55a370ac.jpg132772663465696776 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.94bb3cfb.css132772664960204620 0
+63C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\index.html132772664960194622 0
+71C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\papel.5dad405c.png132772664932642425 0
+72C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\piedra.3e5be059.png132772664932642425 0
+81C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\playingChildren.eefa2f30.png132772664932642425 0
+74C:\Users\MMAaxi\Documents\src\5mod-apx\desafio\build\tie-game.55a370ac.jpg132772664932642425 0
