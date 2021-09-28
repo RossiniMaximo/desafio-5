@@ -614,7 +614,7 @@ class Hands extends HTMLElement {
         div.className = "container";
         div.innerHTML = `\n        <img class="img piedra borde" id="piedra" src="${piedraURL}">\n        <img class="img papel" id="papel" src="${papelURL}">\n        <img class="img tijeras" id="tijeras" src="${tijerasURL}">\n        `;
         const style = document.createElement('style');
-        style.innerHTML = `\n        .container{\n            display : flex;\n            gap : 25px;\n        }\n        .img{\n            height : 150px;\n            display : block\n        }\n        .blur{filter: blur(4px); transition: all 0.15s;}\n        .blur:hover{\n            transform: translate3d(0px,-2px,0px);\n        }\n        `;
+        style.innerHTML = `\n        .container{\n            display : flex;\n            gap : 25px;\n        }\n        .img{\n            height : 150px;\n            display : block;\n        }\n        .blur{filter: blur(4px); transition: all 0.15s;}\n        .blur:hover{\n            transform: translate3d(0px,-2px,0px);\n        }\n        `;
         div.appendChild(style);
         this.shadow.appendChild(div);
     }
@@ -676,7 +676,6 @@ const state = {
         if (gano == true) {
             state.data.winner = "";
             state.data.winner = "player";
-            this.scoreCounter(state.data.winner);
         }
         const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
         const botPapel = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "piedra";
@@ -689,7 +688,6 @@ const state = {
         if (botGana == true) {
             state.data.winner = "";
             state.data.winner = "computer";
-            this.scoreCounter(state.data.winner);
         }
         if (gano == false && botGana == false) state.data.winner = "";
     },
@@ -950,6 +948,8 @@ function initChoices(params) {
     div.className = "container-choices";
     div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""} ; class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} ; class="player-choice__img" id="player-move">\n        </div>\n    `;
     const playerimgEl = div.querySelector("#player-move");
+    if (_state.state.data.winner == "player") _state.state.scoreCounter(_state.state.data.winner);
+    if (_state.state.data.winner == "computer") _state.state.scoreCounter(_state.state.data.winner);
     if (_state.state.data.currentGame.playerMove == "piedra") playerimgEl.src = piedraURL;
     if (_state.state.data.currentGame.playerMove == "papel") playerimgEl.src = papelURL;
     if (_state.state.data.currentGame.playerMove == "tijeras") {

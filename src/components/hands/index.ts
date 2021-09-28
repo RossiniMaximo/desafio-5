@@ -79,7 +79,7 @@ class Hands extends HTMLElement {
         }
         .img{
             height : 150px;
-            display : block
+            display : block;
         }
         .blur{filter: blur(4px); transition: all 0.15s;}
         .blur:hover{

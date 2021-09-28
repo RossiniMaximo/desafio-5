@@ -19,6 +19,16 @@ export function initChoices(params) {
 
     const playerimgEl = div.querySelector("#player-move");
 
+    if (state.data.winner == "player") {
+        state.scoreCounter(state.data.winner);
+    }
+    if (state.data.winner == "computer") {
+        state.scoreCounter(state.data.winner);
+    }
+
+
+
+
     if (state.data.currentGame.playerMove == "piedra") {
         playerimgEl.src = piedraURL;
     };

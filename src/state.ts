@@ -61,7 +61,6 @@ const state = {
         if (gano == true) {
             state.data.winner = ""
             state.data.winner = "player"
-            this.scoreCounter(state.data.winner);
 
         }
         const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
@@ -71,7 +70,6 @@ const state = {
         if (botGana == true) {
             state.data.winner = ""
             state.data.winner = "computer"
-            this.scoreCounter(state.data.winner)
         }
         if (gano == false && botGana == false) {
             state.data.winner = ""
