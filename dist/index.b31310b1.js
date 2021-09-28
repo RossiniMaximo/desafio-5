@@ -785,23 +785,27 @@ var _choices = require("./pages/choices");
 function initRouter(container) {
     const routes = [
         {
-            path: /\/desafio-apx\/home/,
+            path: /\/home/,
             component: _home.initHomePage
         },
         {
-            path: /\/desafio-apx\/rules/,
+            path: /\/desafio-m5/,
+            component: _home.initHomePage
+        },
+        {
+            path: /\/rules/,
             component: _rules.initRules
         },
         {
-            path: /\/desafio-apx\/ingame/,
+            path: /\/ingame/,
             component: _ingamePage.initGamePage
         },
         {
-            path: /\/desafio-apx\/choices/,
+            path: /\/choices/,
             component: _choices.initChoices
         },
         {
-            path: /\/desafio-apx\/result/,
+            path: /\/result/,
             component: _result.initResultPage
         }
     ];
@@ -819,11 +823,12 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    location.host.includes("github.io") || "/";
-    goTo("/desafio-apx/home");
+    if (location.pathname == "/") goTo("/home");
+    else handleRoute(location.pathname);
     window.onpopstate = function() {
         handleRoute(location.pathname);
     };
+    if (location.host.includes("github.io")) goTo("/desafio-apx");
 }
 
 },{"./pages/home":"jrMbi","./pages/rules":"dOTNr","./pages/ingamePage":"i55yI","./pages/result":"hvnGp","./pages/choices":"h7GcF","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"jrMbi":[function(require,module,exports) {
@@ -837,7 +842,7 @@ function initHomePage(params) {
     div.innerHTML = `\n        <div  class="title-container">\n            <h1 class="piedra">Piedra</h1>\n            <span class="papel">Papel <span class="o-word">ó</span></span>\n            <span class="tijera">Tijera</span>\n        </div>\n        <div class="b-container">\n            <my-button id="button-id">Comenzar</my-button>\n        </div>\n        <div class="container-hands">\n            <rps-hands class="hola"></rps-hands>\n        </div>\n    `;
     const buttonEl = div.querySelector("#button-id");
     buttonEl.addEventListener("click", (e)=>{
-        params.goTo("/desafio-apx/rules");
+        params.goTo("/rules");
     });
     return div;
 }
@@ -853,7 +858,7 @@ function initRules(params) {
     div.innerHTML = `\n        <div class="text-container">\n            <p class="text">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos .</p>\n        </div>\n        <div class="button-container">\n            <my-button id="button">¡Jugar!</my-button>\n        </div>\n        <div class="img-container">\n            <rps-hands></rps-hands>\n        </div>\n\n    `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", ()=>{
-        params.goTo("/desafio-apx/ingame/");
+        params.goTo("/ingame");
     });
     return div;
 /* estaba por añadirle styles a los containers */ }
@@ -884,7 +889,7 @@ function initGamePage(params) {
     });
     function goToChoices() {
         setTimeout(()=>{
-            params.goTo("/desafio-apx/choices");
+            params.goTo("/choices");
         }, 5000);
     }
     goToChoices();
@@ -920,7 +925,7 @@ function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
-        params.goTo("/desafio-apx/ingame");
+        params.goTo("/ingame");
     });
     return div;
 }
@@ -968,7 +973,7 @@ function initChoices(params) {
     }
     function goToResultsPage() {
         setTimeout(()=>{
-            params.goTo("/desafio-apx/result");
+            params.goTo("/result");
         }, 2000);
     }
     goToResultsPage();

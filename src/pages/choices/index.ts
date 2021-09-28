@@ -55,7 +55,7 @@ export function initChoices(params) {
     };
     function goToResultsPage() {
         setTimeout(() => {
-            params.goTo("/desafio-apx/result");
+            params.goTo("/result");
         }, 2000)
     }
     goToResultsPage()

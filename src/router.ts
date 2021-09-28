@@ -10,23 +10,27 @@ import { initChoices } from "./pages/choices"
 export function initRouter(container: Element) {
     const routes = [
         {
-            path: /\/desafio-apx\/home/,
+            path: /\/home/,
             component: initHomePage,
         },
         {
-            path: /\/desafio-apx\/rules/,
+            path: /\/desafio-m5/,
+            component: initHomePage,
+        },
+        {
+            path: /\/rules/,
             component: initRules, /* initRulesPage */
         },
         {
-            path: /\/desafio-apx\/ingame/,
+            path: /\/ingame/,
             component: initGamePage, /* initGamePage */
         },
         {
-            path: /\/desafio-apx\/choices/,
+            path: /\/choices/,
             component: initChoices,
         },
         {
-            path: /\/desafio-apx\/result/,
+            path: /\/result/,
             component: initResultPage,  /* initResultPage */
         }
     ]
@@ -47,13 +51,16 @@ export function initRouter(container: Element) {
         }
     }
 
-    if (location.host.includes("github.io") || "/") {
-        goTo("/desafio-apx/home");
+    if (location.pathname == "/") {
+        goTo("/home");
     } else {
         handleRoute(location.pathname);
     };
     window.onpopstate = function () {
         handleRoute(location.pathname);
     };
+    if (location.host.includes("github.io")) {
+        goTo("/desafio-apx");
+    }
 
 }
