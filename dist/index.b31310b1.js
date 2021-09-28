@@ -926,7 +926,7 @@ function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
-        params.goTo("/desafio-apx/ingame");
+        params.goTo("desafio-apx/ingame");
     });
     return div;
 }
