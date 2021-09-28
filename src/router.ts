@@ -10,27 +10,23 @@ import { initChoices } from "./pages/choices"
 export function initRouter(container: Element) {
     const routes = [
         {
-            path: /\/home/,
+            path: /\/desafio-apx\/home/,
             component: initHomePage,
         },
         {
-            path: /\/desafio-apx/,
-            handler: initHomePage,
-        },
-        {
-            path: /\/rules/,
+            path: /\/desafio-apx\/rules/,
             component: initRules, /* initRulesPage */
         },
         {
-            path: /\/ingame/s,
+            path: /\/desafio-apx\/ingame/,
             component: initGamePage, /* initGamePage */
         },
         {
-            path: /\/choices/,
+            path: /\/desafio-apx\/choices/,
             component: initChoices,
         },
         {
-            path: /\/result/,
+            path: /\/desafio-apx\/result/,
             component: initResultPage,  /* initResultPage */
         }
     ]

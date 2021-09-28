@@ -15,7 +15,7 @@ export function initRules(params) {
     `
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", () => {
-        params.goTo("/ingame")
+        params.goTo("/desafio-apx/ingame/")
     })
     return div
     /* estaba por añadirle styles a los containers */
