@@ -1,3 +1,4 @@
+import { state } from "../../state"
 export function initRules(params) {
     const div = document.createElement('div');
     div.className = "container"
@@ -12,9 +13,10 @@ export function initRules(params) {
             <rps-hands></rps-hands>
         </div>
 
-    `
+    `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", () => {
+        state.data.currentGame.playerMove = ""
         params.goTo("/ingame")
     })
     return div

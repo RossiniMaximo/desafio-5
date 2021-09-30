@@ -8,7 +8,7 @@ const state = {
     data: {
         currentGame: {
             playerMove: "",
-            computerMove: ""
+            computerMove: "piedra"
         },
         winner: "",
         playerScore: 0,
@@ -64,9 +64,12 @@ const state = {
 
         }
         const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
+        const botPiedraContraNada = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "";
         const botPapel = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "piedra";
+        const botPapelContraNada = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "";
         const botTijeras = state.data.currentGame.computerMove == "tijeras" && state.data.currentGame.playerMove == "papel";
-        const botGana = [botPiedra, botPapel, botTijeras].includes(true)
+        const botTijerasContraNada = state.data.currentGame.computerMove == "tijeras" && state.data.currentGame.playerMove == "";
+        const botGana = [botPiedra, botPapel, botTijeras, botPiedraContraNada, botPapelContraNada, botTijerasContraNada].includes(true)
         if (botGana == true) {
             state.data.winner = ""
             state.data.winner = "computer"

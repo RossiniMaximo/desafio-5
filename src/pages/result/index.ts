@@ -40,6 +40,7 @@ export function initResultPage(params) {
     }
     const buttonEl = div.querySelector("#play-again-button")
     buttonEl.addEventListener("click", () => {
+        state.data.currentGame.playerMove = ""
         params.goTo("/ingame")
     })
 

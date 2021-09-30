@@ -15,15 +15,19 @@ export function initGamePage(params) {
     <rps-hands></rps-hands>
     </div>
     `;
+    const moves = ["piedra", "papel", "tijeras"];
+    let move = moves[Math.floor(Math.random() * moves.length)];
+
     state.suscribe(() => {
         const pEl = div.querySelector(".move-receptor");
         const pElContent = pEl.textContent = currentState.currentGame.playerMove
         const moves = ["piedra", "papel", "tijeras"];
         let move = moves[Math.floor(Math.random() * moves.length)];
-        state.data.currentGame.computerMove = "";
+        console.log(move);
         state.setComputerMove(move);
         state.result(currentState.playerMove, currentState.computerMove);
     })
+
 
 
     function goToChoices() {

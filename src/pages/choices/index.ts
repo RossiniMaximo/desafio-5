@@ -17,7 +17,9 @@ export function initChoices(params) {
         </div>
     `;
 
+    state.result(state.data.currentGame.playerMove, state.data.currentGame.computerMove)
     const playerimgEl = div.querySelector("#player-move");
+    console.log(playerimgEl);
 
     if (state.data.winner == "player") {
         state.scoreCounter(state.data.winner);
@@ -26,8 +28,12 @@ export function initChoices(params) {
         state.scoreCounter(state.data.winner);
     }
 
-
-
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .no-hand{
+            display : none
+        }
+    `
 
     if (state.data.currentGame.playerMove == "piedra") {
         playerimgEl.src = piedraURL;
@@ -38,6 +44,11 @@ export function initChoices(params) {
     if (state.data.currentGame.playerMove == "tijeras") {
         playerimgEl.src = tijerasURL
         console.log("hola soy tijeras");
+
+    };
+    if (state.data.currentGame.playerMove == "") {
+        playerimgEl.className = "no-hand";
+
 
     };
     const botimgEl = div.querySelector("#computer-move");
@@ -59,5 +70,6 @@ export function initChoices(params) {
         }, 2000)
     }
     goToResultsPage()
+    div.appendChild(style)
     return div
 }

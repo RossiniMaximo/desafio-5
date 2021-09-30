@@ -51,7 +51,7 @@ export function initRouter(container: Element) {
         }
     }
 
-    if (location.pathname == "/") {
+    if (location.pathname == "/desafio-apx/") {
         goTo("/home");
     } else {
         handleRoute(location.pathname);
