@@ -16,7 +16,7 @@ export function initRules(params) {
     `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", () => {
-        state.data.currentGame.playerMove = ""
+        /* state.data.currentGame.playerMove = "" */
         params.goTo("/ingame")
     })
     return div

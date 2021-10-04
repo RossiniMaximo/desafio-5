@@ -36,6 +36,9 @@ body{
     border : solid 10px  rgb(128, 0, 128);
     border-radius: 10px;;
     max-width :500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media(min-width : 960px){

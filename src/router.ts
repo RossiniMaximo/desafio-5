@@ -6,7 +6,6 @@ import { initRules } from "./pages/rules"
 import { initGamePage } from "./pages/ingamePage"
 import { initResultPage } from "./pages/result"
 import { initChoices } from "./pages/choices"
-
 export function initRouter(container: Element) {
     const routes = [
         {
@@ -14,7 +13,7 @@ export function initRouter(container: Element) {
             component: initHomePage,
         },
         {
-            path: /\/desafio-m5/,
+            path: /\/desafio-apx/,
             component: initHomePage,
         },
         {

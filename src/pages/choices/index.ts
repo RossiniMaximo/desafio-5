@@ -17,16 +17,9 @@ export function initChoices(params) {
         </div>
     `;
 
-    state.result(state.data.currentGame.playerMove, state.data.currentGame.computerMove)
+
     const playerimgEl = div.querySelector("#player-move");
     console.log(playerimgEl);
-
-    if (state.data.winner == "player") {
-        state.scoreCounter(state.data.winner);
-    }
-    if (state.data.winner == "computer") {
-        state.scoreCounter(state.data.winner);
-    }
 
     const style = document.createElement("style");
     style.innerHTML = `
@@ -34,6 +27,7 @@ export function initChoices(params) {
             display : none
         }
     `
+
 
     if (state.data.currentGame.playerMove == "piedra") {
         playerimgEl.src = piedraURL;
@@ -43,13 +37,10 @@ export function initChoices(params) {
     };
     if (state.data.currentGame.playerMove == "tijeras") {
         playerimgEl.src = tijerasURL
-        console.log("hola soy tijeras");
 
     };
     if (state.data.currentGame.playerMove == "") {
         playerimgEl.className = "no-hand";
-
-
     };
     const botimgEl = div.querySelector("#computer-move");
 
@@ -62,8 +53,8 @@ export function initChoices(params) {
     };
     if (state.data.currentGame.computerMove == "tijeras") {
         botimgEl.src = tijerasURL
-        console.log("hola soy tijeras");
     };
+
     function goToResultsPage() {
         setTimeout(() => {
             params.goTo("/result");

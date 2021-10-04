@@ -464,8 +464,6 @@ var _router = require("./router");
 var _state = require("./state");
 (function() {
     _state.state.initStorage();
-    localStorage["user-state"] == null || "null";
-    _state.state.setState(_state.state.data);
     const rootEl = document.querySelector(".root");
     _router.initRouter(rootEl);
 })();
@@ -561,9 +559,6 @@ class Hands extends HTMLElement {
         this.shadow = this.attachShadow({
             mode: "open"
         });
-        _state.state.suscribe(()=>{
-            this.handsLogic();
-        });
         this.syncWithState();
         this.handsLogic();
     }
@@ -597,6 +592,7 @@ class Hands extends HTMLElement {
             });
         });
         const tijerasId = this.shadow.querySelector("#tijeras");
+        let triggersCounter = 0;
         tijerasId.addEventListener("click", ()=>{
             tijerasId.classList.remove("blur");
             papelId.classList.add("blur");
@@ -625,44 +621,66 @@ customElements.define("rps-hands", Hands);
 },{"../../state":"28XHA","url:../../images/piedra.png":"jQlP3","url:../../images/papel.png":"8lgLG","url:../../images/tijera.png":"5iyAz"}],"28XHA":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "state", ()=>state
+/* (function () {
+
+    const localState = localStorage.getItem("user-data");
+    const parsedLocal = JSON.parse(localState)
+    console.log("parsed local : ", parsedLocal);
+
+    if (localState == null || "null") {
+        return state.setState({
+            currentGame: {
+                playerMove: "",
+                computerMove: ""
+            },
+            playerScore: 0,
+            computerScore: 0,
+            winner: ""
+        })
+    } else {
+        return state.setState(JSON.parse(localState))
+    }
+
+})() */ parcelHelpers.export(exports, "state", ()=>state
 );
 const state = {
     data: {
         currentGame: {
             playerMove: "",
-            computerMove: "piedra"
+            computerMove: ""
         },
         winner: "",
         playerScore: 0,
         computerScore: 0
     },
     listeners: [],
-    initStorage () {
-        const localData = localStorage.getItem("user-state");
-        const parsedData = JSON.parse(localData);
-        this.setState(parsedData);
-    },
     scoreCounter (winner) {
-        if (winner == "player") state.data.playerScore++;
-        if (winner == "computer") state.data.computerScore++;
+        const newState = state.getState();
+        if (winner === "player") newState.playerScore++;
+        else if (winner === "computer") newState.computerScore++;
+        state.setState(newState);
     },
     getState () {
         return this.data;
     },
     setState (newState) {
+        localStorage.setItem("user-data", JSON.stringify(newState));
         this.data = newState;
-        for (const cb of this.listeners)cb(newState);
-        localStorage.setItem("user-state", JSON.stringify(newState));
-        console.log("Soy el state he cambiado", this.data);
+        for (const cb of this.listeners)cb();
+        console.log("soy el state he cambiado", newState);
+    },
+    initStorage () {
+        const localdata = localStorage.getItem("user-data");
+        if (localdata == "null" || null) return state.getState();
+        else return state.setState(JSON.parse(localdata));
     },
     suscribe (callback) {
         this.listeners.push(callback);
     },
     setMove (move) {
         const currentState = this.getState();
-        currentState.currentGame.playerMove = "";
         currentState.currentGame.playerMove = move;
+        state.setState(currentState);
     },
     result (playerMove, botMove) {
         /* playerMove = state.data.currentGame.playerMove
@@ -674,10 +692,7 @@ const state = {
             ganePapel,
             ganeTijeras
         ].includes(true);
-        if (gano == true) {
-            state.data.winner = "";
-            state.data.winner = "player";
-        }
+        if (gano == true) state.data.winner = "player";
         const botPiedra = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "tijeras";
         const botPiedraContraNada = state.data.currentGame.computerMove == "piedra" && state.data.currentGame.playerMove == "";
         const botPapel = state.data.currentGame.computerMove == "papel" && state.data.currentGame.playerMove == "piedra";
@@ -692,16 +707,13 @@ const state = {
             botPapelContraNada,
             botTijerasContraNada
         ].includes(true);
-        if (botGana == true) {
-            state.data.winner = "";
-            state.data.winner = "computer";
-        }
+        if (botGana == true) state.data.winner = "computer";
         if (gano == false && botGana == false) state.data.winner = "";
     },
     setComputerMove (botMove) {
         const currentState = this.getState();
-        currentState.currentGame.computerMove = "";
         currentState.currentGame.computerMove = botMove;
+        state.setState(currentState);
     }
 };
 
@@ -796,7 +808,7 @@ function initRouter(container) {
             component: _home.initHomePage
         },
         {
-            path: /\/desafio-m5/,
+            path: /\/desafio-apx/,
             component: _home.initHomePage
         },
         {
@@ -843,7 +855,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initHomePage", ()=>initHomePage
 );
+var _state = require("../../state");
 function initHomePage(params) {
+    _state.state.setState(_state.state.data);
     const div = document.createElement("div");
     div.className = "container-homepage";
     div.innerHTML = `\n        <div  class="title-container">\n            <h1 class="piedra">Piedra</h1>\n            <span class="papel">Papel <span class="o-word">ó</span></span>\n            <span class="tijera">Tijera</span>\n        </div>\n        <div class="b-container">\n            <my-button id="button-id">Comenzar</my-button>\n        </div>\n        <div class="container-hands">\n            <rps-hands class="hola"></rps-hands>\n        </div>\n    `;
@@ -854,25 +868,23 @@ function initHomePage(params) {
     return div;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"dOTNr":[function(require,module,exports) {
+},{"../../state":"28XHA","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"dOTNr":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRules", ()=>initRules
 );
-var _state = require("../../state");
 function initRules(params) {
     const div = document.createElement('div');
     div.className = "container";
     div.innerHTML = `\n        <div class="text-container">\n            <p class="text">Presioná jugar y elegí: piedra, papel o tijera antes de que pasen los 3 segundos .</p>\n        </div>\n        <div class="button-container">\n            <my-button id="button">¡Jugar!</my-button>\n        </div>\n        <div class="img-container">\n            <rps-hands></rps-hands>\n        </div>\n\n    `;
     const buttonId = div.querySelector("#button");
     buttonId.addEventListener("click", ()=>{
-        _state.state.data.currentGame.playerMove = "";
-        params.goTo("/ingame");
+        /* state.data.currentGame.playerMove = "" */ params.goTo("/ingame");
     });
     return div;
 /* estaba por añadirle styles a los containers */ }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../state":"28XHA"}],"i55yI":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"i55yI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initGamePage", ()=>initGamePage
@@ -882,26 +894,19 @@ function initGamePage(params) {
     const currentState = _state.state.getState();
     const div = document.createElement("div");
     div.className = "container";
-    div.innerHTML = `\n    <h2 class="title"> ¡Elige una opción!</h2>\n    <div class="timer-container">\n    <the-timer id="timer"></the-timer> \n    </div>\n    <p class="your-move">tu jugada :</p>\n    <p class="move-receptor">${currentState.currentGame.playerMove}</p>\n    <div class="hands-container">\n    <rps-hands></rps-hands>\n    </div>\n    `;
+    div.innerHTML = `\n    <h2 class="title"> ¡Elige una opción!</h2>\n    <div class="timer-container">\n    <the-timer id="timer"></the-timer> \n    </div>\n    <p class="your-move">tu jugada :</p>\n    <p class="move-receptor">${currentState.playerMove}</p>\n    <div class="hands-container">\n    <rps-hands></rps-hands>\n    </div>\n    `;
+    console.log("Soy el state en la pág ingame");
     const moves = [
         "piedra",
         "papel",
         "tijeras"
     ];
     let move = moves[Math.floor(Math.random() * moves.length)];
-    _state.state.data.currentGame.playerMove = "";
+    console.log("soy el move de la pc", move);
+    _state.state.setComputerMove(move);
     _state.state.suscribe(()=>{
         const pEl = div.querySelector(".move-receptor");
         const pElContent = pEl.textContent = currentState.currentGame.playerMove;
-        const moves1 = [
-            "piedra",
-            "papel",
-            "tijeras"
-        ];
-        let move1 = moves1[Math.floor(Math.random() * moves1.length)];
-        console.log(move1);
-        _state.state.setComputerMove(move1);
-        _state.state.result(currentState.playerMove, currentState.computerMove);
     });
     function goToChoices() {
         setTimeout(()=>{
@@ -918,13 +923,17 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initResultPage", ()=>initResultPage
 );
 var _state = require("../../state");
-const winURL = require("url:../../images/star.png");
+const winURL = require("url:../../images/Star.png");
 const loseURL = require("url:../../images/Star2.png");
 const tieURL = require("url:../../images/tie-game.jpg");
 function initResultPage(params) {
+    console.log("soy el state en la pág result", _state.state);
     const currentState = _state.state.getState();
+    _state.state.result(currentState.playerMove, currentState.computerMove);
+    if (currentState.winner == "player") _state.state.scoreCounter("player");
+    if (currentState.winner == "computer") _state.state.scoreCounter("computer");
     const div = document.createElement('div');
-    div.innerHTML = `\n    <div class="result-img">\n        <p id="text" class="result-text">Ganaste!</p>\n        <img src=${winURL} id="image-id"class="img">\n    </div>\n    <div class="content">\n        <div class="scoreboard-container">\n            <h4 class="scoreboard__title">Puntaje</h4>\n            <p class="scoreboard__player">Vos :${currentState.playerScore}</p>\n            <p class="scoreboard__computer">Máquina:${currentState.computerScore}</p>\n        </div>\n        <div class="butt-container">\n            <my-button id="play-again-button">Volver a jugar</my-button>\n        </div>\n    </div>\n    `;
+    div.innerHTML = `\n    <div class="result-img">\n    <p id="text" class="result-text">Ganaste!</p>\n    <img src=${winURL} id="image-id"class="img">\n    </div>\n    <div class="content">\n    <div class="scoreboard-container">\n    <h4 class="scoreboard__title">Puntaje</h4>\n    <p class="scoreboard__player">Vos :${currentState.playerScore}</p>\n    <p class="scoreboard__computer">Máquina:${currentState.computerScore}</p>\n    </div>\n    <div class="butt-container">\n    <my-button id="play-again-button">Volver a jugar</my-button>\n    </div>\n    </div>\n    `;
     const imgEl = div.querySelector("#image-id");
     const textEl = div.querySelector("#text");
     if (currentState.winner == "player") {
@@ -939,6 +948,7 @@ function initResultPage(params) {
         imgEl.setAttribute("src", tieURL);
         textEl.textContent = "¡Empate!";
     }
+    _state.state.setState(currentState);
     const buttonEl = div.querySelector("#play-again-button");
     buttonEl.addEventListener("click", ()=>{
         _state.state.data.currentGame.playerMove = "";
@@ -947,8 +957,8 @@ function initResultPage(params) {
     return div;
 }
 
-},{"../../state":"28XHA","url:../../images/star.png":"d8V6h","url:../../images/Star2.png":"kAKt1","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"d8V6h":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "star.4f11a84e.png";
+},{"../../state":"28XHA","url:../../images/Star.png":"6oElO","url:../../images/Star2.png":"kAKt1","url:../../images/tie-game.jpg":"4Cym7","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc"}],"6oElO":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "Star.e5867e5f.png";
 
 },{"./helpers/bundle-url":"8YnfL"}],"kAKt1":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('Z8Pbo') + "Star2.eeca3e61.png";
@@ -969,19 +979,13 @@ function initChoices(params) {
     const div = document.createElement('div');
     div.className = "container-choices";
     div.innerHTML = `\n        <div class="computer-choice" >\n            <img src=${""} ; class="computer-choice__img" id="computer-move">\n        </div>\n        <div class="player-choice">\n            <img src=${""} ; class="player-choice__img" id="player-move">\n        </div>\n    `;
-    _state.state.result(_state.state.data.currentGame.playerMove, _state.state.data.currentGame.computerMove);
     const playerimgEl = div.querySelector("#player-move");
     console.log(playerimgEl);
-    if (_state.state.data.winner == "player") _state.state.scoreCounter(_state.state.data.winner);
-    if (_state.state.data.winner == "computer") _state.state.scoreCounter(_state.state.data.winner);
     const style = document.createElement("style");
     style.innerHTML = `\n        .no-hand{\n            display : none\n        }\n    `;
     if (_state.state.data.currentGame.playerMove == "piedra") playerimgEl.src = piedraURL;
     if (_state.state.data.currentGame.playerMove == "papel") playerimgEl.src = papelURL;
-    if (_state.state.data.currentGame.playerMove == "tijeras") {
-        playerimgEl.src = tijerasURL;
-        console.log("hola soy tijeras");
-    }
+    if (_state.state.data.currentGame.playerMove == "tijeras") playerimgEl.src = tijerasURL;
     if (_state.state.data.currentGame.playerMove == "") playerimgEl.className = "no-hand";
     const botimgEl = div.querySelector("#computer-move");
     if (_state.state.data.currentGame.computerMove == "piedra") {
@@ -989,10 +993,7 @@ function initChoices(params) {
         botimgEl.setAttribute("src", piedraURL);
     }
     if (_state.state.data.currentGame.computerMove == "papel") botimgEl.src = papelURL;
-    if (_state.state.data.currentGame.computerMove == "tijeras") {
-        botimgEl.src = tijerasURL;
-        console.log("hola soy tijeras");
-    }
+    if (_state.state.data.currentGame.computerMove == "tijeras") botimgEl.src = tijerasURL;
     function goToResultsPage() {
         setTimeout(()=>{
             params.goTo("/result");

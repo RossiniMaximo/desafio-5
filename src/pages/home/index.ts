@@ -1,4 +1,6 @@
+import { state } from "../../state"
 export function initHomePage(params) {
+    state.setState(state.data)
     const div = document.createElement("div");
     div.className = "container-homepage"
     div.innerHTML = `

@@ -5,10 +5,6 @@ class Hands extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: "open" });
-        state.suscribe(() => {
-            this.handsLogic()
-
-        })
         this.syncWithState();
         this.handsLogic();
     }
@@ -42,14 +38,15 @@ class Hands extends HTMLElement {
             })
         })
         const tijerasId = this.shadow.querySelector("#tijeras");
+        let triggersCounter = 0;
         tijerasId.addEventListener("click", () => {
+
             tijerasId.classList.remove("blur")
             papelId.classList.add("blur")
             piedraId.classList.add("blur")
             state.setMove("tijeras")
             state.setState({
                 ...lastState
-
             })
         })
     }
